@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+    <h1>Welcome {{session['name']}}</h1>
+
+    <table style="width: 50%">
+        <tr>
+            <th>Name</th>
+            <th>Under 30?</th>
+            <th>Poster</th>
+            <th>Actions</th>
+        </tr>
+        {% for recipe in data %}
+        <tr>
+            <td>{{recipe.name}}</td>
+            <td>{{recipe.under30}}</td>
+            <td>{{recipe.maker.first_name}}</td>
+            <td>
+                <a href="/recipe-info/{{recipe.id}}">Show</a>
+                {% if session['uid'] == recipe.user_id %}
+                <p style="display: inline">|</p>
+                <a href="/edit-recipe/{{recipe.id}}">Edit</a>
+                <p style="display: inline">|</p>
+                <a href="/recipes/delete/{{recipe.id}}">Delete</a>
+                {% endif %}
+            </td> 
+        </tr>
+        {% endfor %}
+
+    </table>
+
+    <a href="/add-recipe">Add a Recipe</a>
+    <br>
+    <a href="/logout">Logout</a>
+    </body>
+    </html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In And Register</title>
+</head>
+
+<style>
+*{
+    font-family: sans-serif;
+}
+p{
+    text-align: center;
+}
+
+main{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+form{
+    margin: 25px auto;
+    width:350px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    padding: 10px;
+    background-color: #33393E;
+}
+
+h1{
+    color: #FEC008;
+}
+
+label{
+    color: #CED0D3;
+}
+
+input{
+    margin: 10px 0;
+    border-radius: 5px;
+    height: 25px;
+}
+
+.submit{
+    background-color: #FEC008;
+    width: 50%;
+    border-radius: 4px;
+    box-shadow: 2px 2px black;
+    margin-bottom: -15px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    margin: 10px 0;
+}
+
+#hregister{
+    color: #0A74ED;
+}
+
+#register{
+    background-color: #0A74ED;
+    color: white;
+    font-size: 1em;
+}
+
+#hlogin{
+    color: #28A644;
+}
+
+#login{
+    background-color: #28A644;
+    color: white;
+    font-size: 1em;
+}
+
+</style>
+
+<body>
+    {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+        {% if messages %}                            <!-- check if there are any messages -->
+            {% for message in messages %}            <!-- loop through the messages -->
+                <p style="color: red">{{message}}</p>                   <!-- display each message in a paragraph tag -->
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <h1>Recipe Share</h1>
+    
+    <main>
+        <div>
+            <form action="/create_user" method="POST">
+                <h1 id="hregister">Register</h1>
+
+                <label for="">First Name: </label>
+                <input type="text" name="first_name" placeholder="first name">
+                
+                <label for="">Last Name: </label>
+                <input type="text" name="last_name" placeholder="last name">
+
+                <label for="">Email: </label>
+                <input type="text" name="email" placeholder="email">
+
+                <label for="">Password: </label>
+                <input type="password" name="password">
+
+                <label for="">Confirm Password: </label>
+                <input type="password" name="pass_con">
+
+                <input class="submit" id="register" type="submit" value="Register">
+            </form>
+        </div>
+
+        <div>
+            <form action="/login" method="POST">
+                <h1 id="hlogin">Log In</h1>
+
+                <label for="">Email: </label>
+                <input type="text" name="email" placeholder="email">
+
+                <label for="">Password: </label>
+                <input type="password" name="password">
+
+                <input class="submit" id="login" type="submit" value="Log In">
+            </form>
+        </div>
+    </main>    
+</body>
+</html>
